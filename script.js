@@ -1,7 +1,7 @@
+// Function to convert an address into a Google Maps search link
 function generateMapLink(address) {
-const baseUrl = "https://www.google.com/maps/search/?api=1&query=";
-// Encode the address to be URL safe
-return baseUrl + encodeURIComponent(address);
+    const baseUrl = "https://www.google.com/maps/search/?api=1&query=";
+    return baseUrl + encodeURIComponent(address);
 }
 
 // Function to generate HTML for each section
@@ -34,7 +34,8 @@ function generateSection(sectionTitle, items) {
             </a>
         `;
 
-        optionContainer.innerHTML = `<h3>${item.title}</h3>`;
+        // Make the heading a clickable link that opens the Google Maps address
+        optionContainer.innerHTML = `<h3><a href="${mapLink}" target="_blank">${item.title}</a></h3>`;
         optionContainer.appendChild(option);
         section.appendChild(optionContainer);
     });
@@ -42,20 +43,18 @@ function generateSection(sectionTitle, items) {
     return section;
 }
 
-// Function to load all sections dynamically
 // Function to load all sections dynamically by looping over top-level keys in attractions
 function loadContent() {
-const content = document.getElementById('content');
+    const content = document.getElementById('content');
 
-// Loop through each key (section) in the attractions object
-Object.keys(attractions).forEach(sectionTitle => {
-    // Capitalize the first letter of the section title for display
-    const formattedTitle = sectionTitle.charAt(0).toUpperCase() + sectionTitle.slice(1).replace(/([A-Z])/g, ' $1');
-    
-    // Generate the section using the items in the current section
-    const section = generateSection(formattedTitle, attractions[sectionTitle]);
-    content.appendChild(section);
-});
+    // Loop through each key (section) in the attractions object
+    Object.keys(attractions).forEach(sectionTitle => {
+        const formattedTitle = sectionTitle.charAt(0).toUpperCase() + sectionTitle.slice(1).replace(/([A-Z])/g, ' $1');
+
+        // Generate the section using the items in the current section
+        const section = generateSection(formattedTitle, attractions[sectionTitle]);
+        content.appendChild(section);
+    });
 }
 
 // Load content when page loads
