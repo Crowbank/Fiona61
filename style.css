@@ -1,40 +1,101 @@
+/* ... existing styles ... */
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --light-accent: #ecf0f1;
+  --border-color: #ddd;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Add these new rules for links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #2980b9; /* Slightly darker shade of the primary color */
+  text-decoration: underline;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto; /* This will center the container */
-    padding: 0 15px; /* Optional: Add padding for better spacing on smaller screens */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Reverse flex direction for odd-indexed items */
+.option.reverse {
+    flex-direction: row-reverse;
+}
+/* Add this new rule for images */
+.option img {
+    width: 300px; /* Standard size for images */
+    height: 200px;
+    border-radius: 8px;
+}
+
+h1, h2 {
+    color: var(--secondary-color);
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    padding: 20px 0;
+    background-color: var(--primary-color);
+    color: #fff;
+    margin: 0 0 20px 0;
 }
 
-.section {
-    margin-bottom: 40px;
-    background-color: #fff;
+section {
+    margin-bottom: 30px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--light-accent);
+    border-radius: 5px;
 }
+
+strong {
+    color: var(--secondary-color);
+}
+
+ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+/* ... existing styles ... */
+
 
 .option-container {
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 15px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     border-radius: 8px;
 }
 
 .option-container h3 {
     margin-top: 0;
     font-size: 1.5rem;
-    color: #007BFF;
+    color: var(--primary-color);
 }
 
 .option {
