@@ -21,11 +21,30 @@ async function fetchSelectedActivity(slot) {
     }
 }
 
-// Function to generate HTML for each section
+// Modify the generateSection function
 async function generateSection(sectionTitle, items) {
     const section = document.createElement('div');
-    section.classList.add('section');
-    section.innerHTML = `<h2>${sectionTitle}</h2>`;
+    section.classList.add('card', 'mb-3');
+    
+    const headerID = `${sectionTitle.toLowerCase()}Header`;
+    const contentID = `${sectionTitle.toLowerCase()}Content`;
+    
+    section.innerHTML = `
+        <div class="card-header" id="${headerID}">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${contentID}">
+                    <i class="fas fa-plus"></i> ${sectionTitle}
+                </button>
+            </h2>
+        </div>
+        <div id="${contentID}" class="collapse" aria-labelledby="${headerID}">
+            <div class="card-body">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    `;
+
+    const cardBody = section.querySelector('.card-body');
 
     // Fetch the selected activity for this section
     const selectedActivity = await fetchSelectedActivity(sectionTitle.toLowerCase());
@@ -76,7 +95,7 @@ async function generateSection(sectionTitle, items) {
         
         addOptionEventListeners(optionContainer);
 
-        section.appendChild(optionContainer);
+        cardBody.appendChild(optionContainer);
 
         // Select the option if it matches the fetched activity, but don't make a POST request
         if (selectedActivity === item.name) {
@@ -159,6 +178,7 @@ async function loadContent() {
     }
 
     updateSummary();
+    setupCollapseIcons();
 }
 
 // Load content when page loads
@@ -186,32 +206,65 @@ function addOptionEventListeners(optionContainer) {
     }
 }
 
+// Modify the updateSummary function
 function updateSummary() {
-    let summaryHtml = '<h2>Your Day Plan Summary</h2>';
-    
-    ['Morning', 'Lunch', 'Afternoon', 'Tea'].forEach(section => {
+    const sections = ['Morning', 'Lunch', 'Afternoon', 'Tea'];
+    const choices = sections.map(section => {
         const selectedOption = document.querySelector(`.option-container[data-section="${section}"].selected`);
-        let choiceText = 'No selection';
-        
         if (selectedOption) {
             if (selectedOption.classList.contains('small-option')) {
                 const customInput = selectedOption.querySelector('.custom-input');
-                choiceText = customInput && customInput.value.trim() 
+                return customInput && customInput.value.trim() 
                     ? customInput.value.trim() 
                     : selectedOption.querySelector('h3').textContent.trim();
             } else {
-                choiceText = selectedOption.querySelector('h3').textContent.trim();
+                return selectedOption.querySelector('h3').textContent.trim();
             }
         }
-        
-        summaryHtml += `<p><strong>${section}:</strong> ${choiceText}</p>`;
+        return null;
     });
 
-    let summarySection = document.getElementById('summary');
-    if (!summarySection) {
-        summarySection = document.createElement('section');
-        summarySection.id = 'summary';
-        document.querySelector('.container').appendChild(summarySection);
+    let summaryText = '';
+    if (choices.every(choice => choice === null)) {
+        summaryText = "Based on your choices so far, we haven't planned any specific activities yet. As you make selections below, this summary will update to reflect your choices for the day.";
+    } else {
+        summaryText = "Based on your choices so far, we'll ";
+        if (choices[0]) {
+            summaryText += `start the morning with ${choices[0]}`;
+        }
+        if (choices[1]) {
+            summaryText += choices[0] ? `, then ` : ``;
+            summaryText += `have lunch at ${choices[1]}`;
+        }
+        if (choices[2]) {
+            summaryText += (choices[0] || choices[1]) ? `, then ` : ``;
+            summaryText += `visit ${choices[2]} in the afternoon`;
+        }
+        if (choices[3]) {
+            summaryText += (choices[0] || choices[1] || choices[2]) ? `, and finally ` : ``;
+            summaryText += `enjoy tea at ${choices[3]}`;
+        }
+        summaryText += " before returning home.";
     }
-    summarySection.innerHTML = summaryHtml;
+
+    const summaryParagraph = document.getElementById('summary-paragraph');
+    if (summaryParagraph) {
+        summaryParagraph.textContent = summaryText;
+    }
+}
+
+// Modify the setupCollapseIcons function
+function setupCollapseIcons() {
+    document.querySelectorAll('.card-header .btn-link').forEach(button => {
+        button.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (this.getAttribute('aria-expanded') === 'true') {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        });
+    });
 }

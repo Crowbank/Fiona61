@@ -15,7 +15,7 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   margin: 0;
-  padding: 0;
+  padding: 20px 0;
 }
 
 /* Add these new rules for links */
@@ -34,9 +34,38 @@ a:hover, a:focus {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: var(--light-accent);
+}
+
+.card-header .btn-link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
+
+.card-header .btn-link:hover,
+.card-header .btn-link:focus {
+  text-decoration: none;
+}
+
+.card-header .btn-link i {
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card-header .btn-link[aria-expanded="true"] i {
+  transform: rotate(45deg);
 }
 
 /* Reverse flex direction for odd-indexed items */
@@ -85,7 +114,7 @@ li {
 
 
 .option-container {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border: 1px solid var(--border-color);
     padding: 15px;
     background-color: #fff;
