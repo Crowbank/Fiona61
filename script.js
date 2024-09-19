@@ -137,6 +137,7 @@ function selectOption(optionContainer) {
     }
 
     updateSummary();
+    updateItinerary();
 }
 
 // Function to send a POST request to the API with the selected activity
@@ -178,6 +179,7 @@ async function loadContent() {
     }
 
     updateSummary();
+    updateItinerary();
     setupCollapseIcons();
 }
 
@@ -267,4 +269,75 @@ function setupCollapseIcons() {
             }
         });
     });
+}
+
+// Add this new function to update the itinerary
+function updateItinerary() {
+    const sections = ['Morning', 'Lunch', 'Afternoon', 'Tea'];
+    const itineraryList = document.getElementById('dynamic-itinerary');
+    itineraryList.innerHTML = ''; // Clear existing content
+
+    // Add static items
+    itineraryList.innerHTML += `
+        <li><strong>Departure from the Kennels:</strong>
+            <p>We will leave the kennels at <strong>8:30 AM</strong> to ensure 
+                we have enough time to reach Cumbernauld train station (about a 15-minute drive).</p>
+        </li>
+        <li><strong>Train Departure from Cumbernauld:</strong>
+            <p><strong>Departure time:</strong> <strong>8:45 AM</strong> from Cumbernauld train station, arriving in Glasgow by <strong>9:30 AM</strong> (the journey takes approximately 45-50 minutes).</p>
+        </li>
+    `;
+
+    // Add dynamic items based on selections
+    sections.forEach((section, index) => {
+        const selectedOption = document.querySelector(`.option-container[data-section="${section}"].selected`);
+        let activityText = '';
+
+        if (selectedOption) {
+            if (selectedOption.classList.contains('small-option')) {
+                const customInput = selectedOption.querySelector('.custom-input');
+                activityText = customInput && customInput.value.trim() 
+                    ? customInput.value.trim() 
+                    : selectedOption.querySelector('h3').textContent.trim();
+            } else {
+                activityText = selectedOption.querySelector('h3').textContent.trim();
+            }
+        }
+
+        if (activityText && !activityText.toLowerCase().includes('no activity') && !activityText.toLowerCase().includes('skip')) {
+            let listItem = '';
+            switch(index) {
+                case 0:
+                    listItem = `<li><strong>Morning Activities (9:30 AM - 11:45 AM):</strong>
+                        <p>We'll start with ${activityText}.</p></li>`;
+                    break;
+                case 1:
+                    listItem = `<li><strong>Lunch in Glasgow (12:00 PM - 1:00 PM):</strong>
+                        <p>We'll have lunch at ${activityText}.</p></li>`;
+                    break;
+                case 2:
+                    listItem = `<li><strong>Afternoon Adventures (1:15 PM - 3:15 PM):</strong>
+                        <p>After lunch, we'll explore ${activityText}.</p></li>`;
+                    break;
+                case 3:
+                    listItem = `<li><strong>Afternoon Tea (3:30 PM - 4:15 PM):</strong>
+                        <p>We'll enjoy afternoon tea at ${activityText}.</p></li>`;
+                    break;
+            }
+            itineraryList.innerHTML += listItem;
+        }
+    });
+
+    // Add static return items
+    itineraryList.innerHTML += `
+        <li><strong>Return to Cumbernauld:</strong>
+            <p>We'll head back to Glasgow Queen Street Station for the return train. 
+                <strong>Train departure time from Glasgow:</strong> <strong>4:30 PM</strong>, 
+                arriving back in Cumbernauld by <strong>5:15 PM</strong>.</p>
+        </li>
+        <li><strong>Return to the Kennels:</strong>
+            <p>We'll drive from the Cumbernauld train station back to the kennels, 
+                arriving by <strong>5:30 PM</strong>.</p>
+        </li>
+    `;
 }
