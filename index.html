@@ -16,27 +16,37 @@
         <!-- Introduction Section (non-collapsible) -->
         <div class="card mb-3">
             <div class="card-body">
-                <p>Dear Fiona,</p>
-                <p> This website has been created to help plan a lovedly day out in Glasgow, tailored to your preferences.</p>
-                <p><strong>Public Transportation:</strong> Using public transport gives us the flexibility to 
-                    relax and enjoy the day, including having drinks at lunch or tea.</p>
-                <p><strong>Kennel Care:</strong> The departure and return times are well within the 
-                    opening hours of the kennels, and our staff will take care of everything, 
-                    including Magnus. The day, <strong>October 9th</strong>, 
-                    will be relatively quiet with 20 kennels occupied, 4 arrivals, and 3 departures. 
-                    We'll have extra staff on hand, just like we did for my birthday earlier this year.</p>
+                <div class="intro-top">
+                    <div class="intro-text-top">
+                        <p>Dear Fiona,</p>
+                        <p>This website has been created to help plan a lovely day out in Glasgow, tailored to your preferences.</p>
+                        <p><strong>Public Transportation:</strong> Using public transport gives us the flexibility to 
+                            relax and enjoy the day, including having drinks at lunch or tea.</p>
+                    </div>
+                    <div class="intro-image-container">
+                        <img src="https://2f1a7f9478.visitscotland.net/binaries/content/gallery/visitscotland/cms-images/2022/07/04/queens-park-glasgow.jpg" alt="Beautiful Glasgow scenery" class="intro-image">
+                    </div>
+                </div>
+                <div class="intro-bottom">
+                    <p><strong>Kennel Care:</strong> The departure and return times are well within the 
+                        opening hours of the kennels, and our staff will take care of everything, 
+                        including Magnus. The day, <strong>October 9th</strong>, 
+                        will be relatively quiet with 20 kennels occupied, 4 arrivals, and 3 departures. 
+                        We'll have extra staff on hand, just like we did for my birthday earlier this year.</p>
                     <p>You can use the last section to customise the plan for the day.</p>
-                <p id="summary-paragraph"></p>
-                <h4>Happy Birthday!</h4>
+                    <p id="summary-paragraph"></p>
+                    <h4>Happy Birthday!</h4>
+                </div>
             </div>
         </div>
         <!-- Proposed Itinerary Section -->
         <div class="card mb-3">
             <div class="card-header" id="itineraryHeader">
-                <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#itineraryContent">
+                <h2 class="mb-0 section-header">
+                    <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#itineraryContent" aria-expanded="false" aria-controls="itineraryContent">
                         <i class="fas fa-plus"></i> Proposed Itinerary
                     </button>
+                    <i class="fas fa-route section-icon"></i>
                 </h2>
             </div>
             <div id="itineraryContent" class="collapse" aria-labelledby="itineraryHeader">
@@ -55,10 +65,11 @@
         <!-- Customize Your Day Section -->
         <div class="card mb-3">
             <div class="card-header" id="customizeHeader">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#customizeContent">
+                <h2 class="mb-0 section-header">
+                    <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#customizeContent" aria-expanded="false" aria-controls="customizeContent">
                         <i class="fas fa-plus"></i> Customize Your Day Out
                     </button>
+                    <i class="fas fa-paint-brush section-icon"></i>
                 </h2>
             </div>
             <div id="customizeContent" class="collapse" aria-labelledby="customizeHeader">

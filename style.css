@@ -259,3 +259,118 @@ li {
 #summary h2 {
     margin-top: 0;
 }
+
+.card-body {
+    padding: 30px; /* Increased from default */
+}
+
+.card-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.intro-top {
+    display: flex;
+    gap: 30px; /* Increased from 20px */
+    margin-bottom: 30px; /* Increased from 20px */
+    padding: 20px; /* Added padding */
+    background-color: var(--light-accent);
+    border-radius: 8px;
+}
+
+.intro-text-top {
+    flex: 1;
+}
+
+.intro-image-container {
+    flex: 1;
+    max-width: 50%;
+}
+
+.intro-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.intro-bottom {
+    width: 100%;
+    padding: 20px; /* Added padding */
+    background-color: var(--light-accent);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .intro-top {
+        flex-direction: column;
+        padding: 15px; /* Slightly less padding on mobile */
+    }
+
+    .intro-image-container {
+        max-width: 100%;
+        margin-bottom: 20px; /* Increased from 15px */
+    }
+
+    .intro-bottom {
+        padding: 15px; /* Slightly less padding on mobile */
+    }
+}
+
+/* Remove or comment out the previous .intro-content, .intro-image, and .intro-text styles */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-icon {
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.card-header .btn-link {
+    flex-grow: 1;
+    text-align: left;
+}
+
+@media (max-width: 576px) {
+    .section-icon {
+        font-size: 1.5rem;
+    }
+}
+
+/* Add these new styles at the end of your existing CSS */
+
+@media (max-width: 768px) {
+    .card-header .btn-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        text-align: left;
+        padding: 10px 15px;
+    }
+
+    .section-header {
+        flex-direction: row-reverse;
+    }
+
+    .section-icon {
+        margin-right: 15px;
+    }
+
+    .card-header .btn-link i.fas.fa-plus {
+        margin-left: auto;
+    }
+
+    #itineraryContent, #customizeContent {
+        display: none;
+    }
+
+    #itineraryContent.show, #customizeContent.show {
+        display: block;
+    }
+}
