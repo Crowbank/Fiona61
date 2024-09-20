@@ -231,6 +231,93 @@ li {
         margin-left: 0;
         margin-top: 5px;
     }
+
+    .container {
+        padding: 5px;
+    }
+
+    .card-body {
+        padding: 10px 5px; /* Reduced horizontal padding for mobile */
+    }
+
+    .intro-top, .intro-bottom {
+        padding: 10px 5px;
+    }
+
+    .card-header .btn-link {
+        padding: 5px;
+    }
+
+    .option-container {
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .small-option {
+        padding: 5px;
+        min-height: 40px;
+    }
+
+    .custom-input {
+        width: calc(100% - 10px);
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+    .option {
+        margin-top: 5px;
+    }
+
+    .option .content {
+        padding-right: 10px;
+    }
+
+    .option.reverse .content {
+        padding-left: 10px;
+    }
+
+    .address {
+        margin-top: 5px;
+    }
+
+    ol {
+        padding-left: 15px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    #summary {
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .save-button {
+        margin-top: 5px;
+        padding: 3px 8px;
+    }
+
+    /* Adjustments for section headers */
+    .section-header {
+        padding: 5px;
+    }
+
+    .section-icon {
+        margin-right: 10px;
+    }
+
+    .card-header .btn-link i.fas.fa-plus {
+        margin-left: 5px;
+    }
+
+    #itineraryContent, #customizeContent {
+        display: none;
+    }
+
+    #itineraryContent.show, #customizeContent.show {
+        display: block;
+    }
 }
 
 /* ... rest of the existing styles ... */
